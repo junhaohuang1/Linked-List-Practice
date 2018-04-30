@@ -15,7 +15,7 @@ int main()
 	string employeeName;
 	ifstream inFile;
 	openFile(inFile);
-	//DoublyLinkedList<Employee> list;
+	DoublyLinkedList<Employee> list;
 
 	while (inFile >> employeeID) {
 		inFile >> hourlyRate;
@@ -23,9 +23,9 @@ int main()
 		Employee* newEmployee = new Employee(employeeID, hourlyRate, employeeName);
 		//list.insertAtHead(newEmployee);
 		cout << newEmployee->getEmployeeName() << endl;
+		delete newEmployee;
 	}
 	
-
     return 0;
 }
 

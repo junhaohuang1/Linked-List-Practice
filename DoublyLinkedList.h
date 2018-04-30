@@ -1,7 +1,8 @@
 #pragma once
 
-template<class T> class DoublyLinkedList
-{
+template <class T> 
+class DoublyLinkedList {
+
 private:
 	struct Node
 	{
@@ -17,13 +18,15 @@ private:
 
 public:
 
-	DoublyLinkedList();
-	~DoublyLinkedList();
+	DoublyLinkedList<T>();
+	~DoublyLinkedList<T>();
 	void insertAtHead(const T& data);
 	bool isEmpty();
 	T removeFromHead();
-	DoublyLinkedList(const DoublyLinkedList& rhs);
-	DoublyLinkedList& operator=(const DoublyLinkedList& rhs);
+	DoublyLinkedList<T>(const DoublyLinkedList<T>& rhs);
+	DoublyLinkedList<T>& operator=(const DoublyLinkedList<T>& rhs);
 	int size() const;
 	void clear();
+
 };
+
