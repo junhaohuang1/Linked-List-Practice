@@ -18,7 +18,7 @@ template <typename T>
 typename DoublyLinkedList<T>::Node * DoublyLinkedList<T>::recursiveCopy(Node* rhsHead) {
 	if (rhsHead == nullptr)
 		return nullptr;
-	return new Node<T>(rhsHead->data, rhsHead, recursiveCopy(rhsHead->next));
+	return new Node(rhsHead->data, rhsHead, recursiveCopy(rhsHead->next));
 }
 
 template<class T>
@@ -85,6 +85,6 @@ template<class T>
 inline void DoublyLinkedList<T>::clear()
 {
 	while (!isEmpty())
-		removeHead();
+		removeFromHead();
 }
 
