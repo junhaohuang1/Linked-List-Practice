@@ -1,13 +1,13 @@
 #pragma once
-#include <iostream>
 #include <string>
+#include <iostream>
 using namespace std;
-
 
 class Employee
 {
 public:
 	Employee(int id, double hourlyPayRate, string employeeName);
+	Employee();
 	int getId() const;
 	double getHourlyPayRate() const;
 	string getEmployeeName() const;
@@ -17,7 +17,9 @@ public:
 	void setEmployeeName(string employeeName);
 	void setHoursWorked(int hoursWorked);
 	void setTotalCompensation(double totalCompensation);
-	friend ostream& operator << (ostream& cout, Employee employee);
+	void addHoursWorked(int hours);
+	void calculateTotalCompensation();
+	friend ostream& operator << (ostream& cout, const Employee&);
 
 	~Employee();
 
@@ -28,4 +30,3 @@ private:
 	int hoursWorked;
 	double totalCompensation;
 };
-

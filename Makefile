@@ -18,4 +18,4 @@ Employee.o:Employee.cpp
 	$(CC) $(CFLAGS) Employee.cpp
 
 clean:
-	del *.o jhh492_hw15_q1
+	rm *.o jhh492_hw15_q1
