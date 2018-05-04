@@ -20,6 +20,7 @@ public:
 	void addHoursWorked(int hours);
 	void calculateTotalCompensation();
 	friend ostream& operator << (ostream& cout, const Employee&);
+	friend bool operator==(Employee& employee1, Employee& employee2);
 
 	~Employee();
 

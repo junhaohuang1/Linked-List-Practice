@@ -77,8 +77,14 @@ Employee::~Employee()
 {
 }
 
+
 ostream & operator<<(ostream & cout, const Employee& employee)
 {
 	cout << employee.employeeName << ", $" << employee.totalCompensation;
 	return cout;
+}
+
+bool operator==(Employee & employee1, Employee & employee2)
+{
+	return employee1.id == employee2.id;
 }

@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 template <class T>
 class DoublyLinkedList {
@@ -14,6 +13,7 @@ private:
 		Node(const T& data, Node* previous, Node* next) :data(data), previous(previous),  next(next) {}
 	};
 
+	int nodeCount;
 	Node* head;
 	Node* recursiveCopy(Node* rhsHead);
 
@@ -28,10 +28,11 @@ public:
 	DoublyLinkedList<T>& operator=(const DoublyLinkedList<T>& rhs);
 	int size() const;
 	void clear();
+	void remove(T data);
 	Node* getHead() const;
 	class Iterator {
 	public:
-		Iterator(Node* head) : current(head) {}
+		Iterator(Node* startingNode) : current(startingNode) {}
 		Iterator operator=(Node* rhs) { this->current = rhs; }
 		Iterator operator++(int) { 
 			if(current != nullptr)
@@ -89,6 +90,7 @@ void DoublyLinkedList<T>::insertAtHead(const T & data)
 		head->previous = newNode;
 		head = newNode;
 	}
+	nodeCount++;
 }
 
 
@@ -107,11 +109,12 @@ T DoublyLinkedList<T>::removeFromHead()
 		head = head->next;
 		T retval = temp->data;
 		delete temp;
-		if(head)
+		if(head != nullptr)
 			head->previous = nullptr;
+		nodeCount--;
 		return retval;
 	}
-	cout << "List was empty! Nothing to remove from head!" << endl;
+	std::cout << "List was empty! Nothing to remove from head!" << std::endl;
 }
 
 template<class T>
@@ -121,19 +124,14 @@ DoublyLinkedList<T>& DoublyLinkedList<T>::operator=(const DoublyLinkedList<T>& r
 		return *this;
 	clear();
 	head = recursiveCopy(rhs.head);
+	this->nodeCount = rhs.nodeCount;
 	return *this;
 }
 
 template<class T>
 int DoublyLinkedList<T>::size() const
 {
-	Node* temp = head;
-	int count = 0;
-	while (temp != nullptr) {
-		count++;
-		temp = temp->next;
-	}
-	return count;
+	return this->nodeCount;
 }
 
 template<class T>
@@ -141,6 +139,31 @@ void DoublyLinkedList<T>::clear()
 {
 	while (!isEmpty())
 		removeFromHead();
+}
+
+template<class T>
+inline void DoublyLinkedList<T>::remove(T data)
+{
+	if (isEmpty())
+		return;
+	if (head->data == data)
+		removeFromHead();
+	else {
+		Node* temp = head;
+		while (temp != nullptr) {
+			if (temp->data == data) {
+				if (temp->previous != nullptr)
+					temp->previous->next = temp->next;
+				if(temp->next != nullptr)
+					temp->next->previous = temp->previous;
+				nodeCount--;
+				delete temp;
+				return;
+			}
+			temp = temp->next;
+		}
+	}
+
 }
 
 
